@@ -1,0 +1,24 @@
+{
+    "name": "aa-ahmed-aa/dorm",
+    "description": "this package will ",
+    "keywords": ["template", "composer", "package", "command-line", "compilers", "c/c++","compiler-manager"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Khaled",
+            "email": "ahmedkhaled36@hotmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {
+		"php": ">=5.4"
+    },
+	"require-dev": {
+		"phpunit/phpunit": "5.2.*"
+    },
+	"autoload": {
+        "psr-4": {
+            "Buonzz\\Template\\": "src/"
+        }
+    }
+}
