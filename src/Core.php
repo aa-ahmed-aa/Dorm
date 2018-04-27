@@ -63,7 +63,7 @@ Class Core{
      * @param $command => the command we will run
      * @return string => return the time_limit_exceeded if the time is greater than 5 second
      */
-    public function RunCommand($command)
+    public function runCommand($command)
     {
         
         $descriptorspec = array(
@@ -93,7 +93,7 @@ Class Core{
         
                 system("taskkill /im program.exe /f");
         
-                return "too much time";
+                return false;
         
             }
         

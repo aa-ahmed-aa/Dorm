@@ -2,48 +2,40 @@
 namespace Ahmedkhd\Dorm;
 
 use Ahmedkhd\Dorm\Core;
+use Ahmedkhd\Dorm\Config;
 
 class Dorm extends Core{
     /**
      * this function will create a temp cpp file to run the code and will return the response
      * @param $code => the code cpp or java
      * @param $compiler => compiler we will use to compile this code
-     * @return bool => true if the code run successfult, false otherwise
+     * @return bool => true if the code run successfuly, false otherwise
      */
     public function compile( $code, $compiler )
     {
-        $random_name = rand(0,999999)."_".time();
+        
+        $com_conf = Config::getCompiler($compiler);
+        
+        //put the code in a random file
+        $file_extension = $com_conf['file_extension'];
 
-        if($compiler == "C")
-        {
-            $file_name = $this->getCompilationPath() . DS . $random_name . ".c";
-        }else if($compiler == "C++")
-        {
-            $file_name = $this->getCompilationPath() . DS . $random_name . ".cpp";
-        }
+        $random_name = rand(0,999999) . "_" . time() . $file_extension ;
 
+        $file_name = $this->getCompilationPath() . DS . $random_name ;
 
-        file_put_contents($file_name,$code);
+        file_put_contents( $file_name, $code );
 
         $executable = $this->getCompilationPath() . DS . "program.exe";
 
-        if($compiler == "C")
-        {
-            $command = GCC . " -o ". $executable ." ".$file_name." 2>&1";
-        }else if($compiler == "C++")
-        {
-            $command = GPlusPLus . " -o ". $executable ." ".$file_name." 2>&1";
-        }
-        exec($command , $output, $status);
+        //construct the command based on the compiler
+        $compiler_path = $com_conf['path'];
+        
+        $command = $compiler_path . " -o ". $executable ." ".$file_name." 2>&1";
 
-        if( empty($output) )
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        //i did not use Core::runCommand because its not build for compilation
+        exec( $command , $output, $status);
+
+        return ( empty($output) ? true : false );
     }
 
     /**
@@ -60,7 +52,7 @@ class Dorm extends Core{
         //execute the .exe file
         $command = "cd " . $this->getCompilationPath() . DS . " & ";
         $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
-        $output = $this->RunCommand($command);
+        $output = $this->runCommand($command);
 
         if($output == TIME_LIMIT_EXCEEDED)
             return TIME_LIMIT_EXCEEDED;

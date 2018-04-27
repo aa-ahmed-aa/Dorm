@@ -3,7 +3,7 @@ namespace Ahmedkhd\Dorm;
 
 class Config{
 	
-	public function getCompiler( $compiler = null )
+	public static function getCompiler( $compiler = null )
 	{
 		$compilers = [
 			"c++"=>[
