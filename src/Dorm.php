@@ -1,5 +1,7 @@
 <?php
-include_once('Core.php');
+namespace Ahmedkhd\Dorm;
+
+use Ahmedkhd\Dorm\Core;
 
 class Dorm extends Core{
     /**

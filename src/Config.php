@@ -1,4 +1,5 @@
 <?php
+namespace Ahmedkhd\Dorm;
 
 class Config{
 	

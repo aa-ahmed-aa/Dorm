@@ -1,66 +1,22 @@
-<?php 
-include_once('..\src\configuration.php');
+<?php
+namespace Ahmedkhd\Dorm\Test;
 
-include_once('..\src\Core.php');
+use Ahmedkhd\Dorm\Core;
 
-include_once('..\src\Dorm.php');
-
-
-class ConfigurationTest extends PHPUnit_Framework_TestCase{
-
-	public function setUp(){ }
-
-	public function tearDown(){ }
+class CoreTest extends \PHPUnit_Framework_TestCase{
 
 	/**
 	* this will check for any syntax error
 	*/
 	public function testIsThereAnySyntaxError(){
 
-	  	$var = new Config();
+	  	$var = new Core();
 
 	  	$this->assertTrue(is_object($var));
 
 	  	unset($var);
 
   	}
-
-  	/**
-  	* @test Config::getCompiler
-  	*/
-	public function test_get_compiler_function()
-	{
-
-		$obj = new Config();
-
-		$compilers = [
-
-			"c++"=>[
-
-				"path" => "C:\MinGW\bin\g++.exe",
-
-				"file_extension" =>'.cpp'
-
-			],
-
-			"c"=>[
-
-				"path" => "C:\MinGW\bin\gcc.exe",
-
-				"file_extension" =>'.c'
-
-			],
-
-		];
-
-		foreach($compilers as $key => $compiler)
-		{
-
-			$this->assertTrue( $obj->getCompiler($key) == $compiler );	
-
-		}
-		
-	}
 
 	/**
 	* @test Core::create_folder_if_not_existed
@@ -76,6 +32,8 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase{
 
 		$this->assertTrue( file_exists($path) );
 
+		rmdir($path);
+	
 	}
 
 	/**
@@ -94,10 +52,13 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase{
 		$gotten_path = $c->getCompilationPath();
 
 		$this->assertTrue( $gotten_path === $path );
+
+		rmdir($path);
+	
 	}
 
 	/**
-	*
+	* @test Core::clean_compilation_folder
 	*/
 	public function test_clean_compilation_folder()
 	{
@@ -116,8 +77,9 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase{
 
 		$this->assertTrue( !file_exists('C:\xampp\htdocs\Dorm\testdir\ahmed.test') );
 
+		rmdir($path);
+		
 	}
-
 
 }
 ?>

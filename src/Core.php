@@ -1,6 +1,8 @@
 <?php
+namespace Ahmedkhd\Dorm;
 
 Class Core{
+
 	 private $compilationPath;
 
     /**
@@ -9,8 +11,11 @@ Class Core{
      */
     public function setCompilationPath($path)
     {
+    
         $this->createFolderIfNotExisted($path);
+    
         $this->compilationPath = $path;
+    
     }
 
     /**
@@ -19,7 +24,9 @@ Class Core{
      */
     public function getCompilationPath()
     {
+
         return $this->compilationPath;
+    
     }
 
     /**
@@ -28,10 +35,12 @@ Class Core{
      */
     public function createFolderIfNotExisted($path)
     {
+        
         if(!file_exists($path))
         {
             mkdir($path);
         }
+
     }
 
     /**
@@ -42,8 +51,10 @@ Class Core{
     {
            foreach($files_to_delete as $file)
            {
+
                if(file_exists($file))
-                   unlink($file);
+                    unlink($file);
+           
            }
     }
 
@@ -54,28 +65,42 @@ Class Core{
      */
     public function RunCommand($command)
     {
+        
         $descriptorspec = array(
+            
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+            
             1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+            
             2 => array("file", "error-output.txt", "a") // stderr is a file to write to
+
         );
 
         $time = time();
+
         $output = '';
+        
         $process = proc_open($command, $descriptorspec, $pipes);
 
         $sx=shell_exec("tasklist");
+        
         while( strpos($sx, "program.exe") != false ) {
 
             $sx=shell_exec("tasklist");
 
-            if(time()-$time>5){
+            if(time()-$time>5)
+            {
+        
                 system("taskkill /im program.exe /f");
+        
                 return "too much time";
+        
             }
+        
         }
 
         return $output;
+    
     }
 }
 ?>

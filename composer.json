@@ -1,7 +1,7 @@
 {
     "name": "aa-ahmed-aa/dorm",
     "description": "this package will ",
-    "keywords": ["template", "composer", "package", "command-line", "compilers", "c/c++","compiler-manager"],
+    "keywords": ["command-line", "compilers", "c/c++","compiler-manager"],
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +18,12 @@
     },
 	"autoload": {
         "psr-4": {
-            "Buonzz\\Template\\": "src/"
+            "Ahmedkhd\\Dorm\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ahmedkhd\\Dorm\\Test\\": "tests"
         }
     }
 }
