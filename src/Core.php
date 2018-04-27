@@ -1,6 +1,18 @@
 <?php
 namespace Ahmedkhd\Dorm;
 
+if( ! defined('ACCEPTED') ) 
+    define('ACCEPTED', 0);
+
+if( ! defined('WRONG_ANSWER') ) 
+    define('WRONG_ANSWER', 1);
+
+if( ! defined('TIME_LIMIT_EXCEEDED') ) 
+    define('TIME_LIMIT_EXCEEDED', 2);
+
+if( ! defined('COMPILER_ERROR') ) 
+    define('COMPILER_ERROR', 3);
+
 Class Core{
 
 	 private $compilationPath;
@@ -65,7 +77,6 @@ Class Core{
      */
     public function runCommand($command)
     {
-        
         $descriptorspec = array(
             
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
@@ -82,20 +93,14 @@ Class Core{
         
         $process = proc_open($command, $descriptorspec, $pipes);
 
-        $sx=shell_exec("tasklist");
+        sleep(2);
         
-        while( strpos($sx, "program.exe") != false ) {
+        if( strpos(shell_exec("tasklist"), "program.exe") )
+        {
 
-            $sx=shell_exec("tasklist");
-
-            if(time()-$time>5)
-            {
-        
-                system("taskkill /im program.exe /f");
-        
-                return false;
-        
-            }
+            system("taskkill /im program.exe /f");
+            
+            return TIME_LIMIT_EXCEEDED;
         
         }
 

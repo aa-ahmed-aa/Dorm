@@ -68,13 +68,15 @@ class Dorm extends Core{
         $user_output = file_get_contents($output_file_name);
         $correct_output = $output_file['file_content'];
 
-        if( $user_output  == $correct_output )
+        // die( "\nthis is user out\n" . $user_output . "\nthis is the correct out\n" . $correct_output );
+
+        if( strcmp($user_output, $correct_output) == 0 )
         {
             $this->cleanCompilationFolder([$output_file_name]);
             return ACCEPTED;
         }
-        $this->cleanCompilationFolder([$output_file_name]);
 
+        $this->cleanCompilationFolder([$output_file_name]);
         return WRONG_ANSWER;
     }
 
