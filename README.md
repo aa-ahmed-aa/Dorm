@@ -43,7 +43,7 @@ $cpp_code = <<<'EOT'
 	    return 0;
 				}
 EOT;
-$comp = $obj->compile( cpp_code, 'c++' );
+$comp = $obj->compile( $cpp_code, 'c++' );
 echo ($comp ? "success" : "fail" ) ;
 ```
 
