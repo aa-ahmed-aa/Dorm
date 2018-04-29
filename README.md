@@ -11,8 +11,8 @@ to your `composer.json` file add this to your require list
         "aa-ahmed-aa/dorm": "~1.0"
     }
 }
-then run `composer update`
 ```
+then run `composer update`
 ## :hammer: Configuration 
 First you need to install c/c++ compiler gcc/g++ and configure their paths in the package<br>
 - you can find the MinGW compiler <a href="https://nuwen.net/mingw.html">Here</a><br>
@@ -51,7 +51,7 @@ echo ($comp ? "success" : "fail" ) ;
 This package is designed to handle compile/run of any other compilers in your project so you can check this class `src/Config.php` and add your configurations<br>
 ```
 	$compilers = [
-		"c++"=>[
+		"__COMPILER_NAME__"=>[
 			"path" => "__COMPILER_PATH__",
 			"file_extension" =>'__CODE_FILE_EXTENSION_'
 		]
