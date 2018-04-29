@@ -49,7 +49,7 @@ echo ($comp ? "success" : "fail" ) ;
 
 ## :electric_plug: Add your compiler 
 This package is designed to handle compile/run of any other compilers in your project so you can check this class `src/Config.php` and add your configurations<br>
-```
+```php
 	$compilers = [
 		"__COMPILER_NAME__"=>[
 			"path" => "__COMPILER_PATH__",
