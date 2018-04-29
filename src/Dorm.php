@@ -3,7 +3,7 @@ namespace Ahmedkhd\Dorm;
 
 use Ahmedkhd\Dorm\Core;
 use Ahmedkhd\Dorm\Config;
-
+ 
 if( ! defined('ACCEPTED') ) 
     define('ACCEPTED', 0);
 

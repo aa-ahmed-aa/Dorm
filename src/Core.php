@@ -12,7 +12,7 @@ if( ! defined('TIME_LIMIT_EXCEEDED') )
 
 if( ! defined('COMPILER_ERROR') ) 
     define('COMPILER_ERROR', 3);
-
+ 
 if( ! defined('DS') ) 
     define('DS', DIRECTORY_SEPARATOR);
 
