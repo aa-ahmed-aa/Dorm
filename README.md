@@ -11,7 +11,7 @@ First you need to install c/c++ compiler gcc/g++ and configure their paths in th
 ## Usage :flashlight:
 
 ## Add your compiler :electric_plug:
-This package is designed to handle compile/run of any other compilers in your project so you can check this class `src/Config` and add your configurations<br>
+This package is designed to handle compile/run of any other compilers in your project so you can check this class `src/Config.php` and add your configurations<br>
 ```
 	$compilers = [
 		"c++"=>[
@@ -21,3 +21,4 @@ This package is designed to handle compile/run of any other compilers in your pr
 	];
 ```
 ## Liscence
+The MIT License (MIT). Please see [License](https://github.com/aa-ahmed-aa/Dorm/blob/master/LICENSE) File for more information.
