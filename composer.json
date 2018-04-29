@@ -1,6 +1,6 @@
 {
     "name": "aa-ahmed-aa/dorm",
-    "description": "this is a compiler package for compiling and running c and cpp files this package is designed to can add any other compilers later.",
+    "description": "This is a compiler package for compiling and running c and cpp files this package is designed to can add any other compilers later.",
     "keywords": ["command-line", "compilers", "c", "cpp","compiler-manager"],
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "email": "ahmedkhaled36@hotmail.com"
         }
     ],
-    "type": "project",
+    "type": "package",
     "require": {
 		"php": ">=5.4"
     },
