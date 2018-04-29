@@ -1,6 +1,6 @@
 {
     "name": "aa-ahmed-aa/dorm",
-    "description": "this package will ",
+    "description": "this is a compiler package for compiling and running c/c++ files this package is designed to can add any other compilers later.",
     "keywords": ["command-line", "compilers", "c/c++","compiler-manager"],
     "license": "MIT",
     "authors": [
