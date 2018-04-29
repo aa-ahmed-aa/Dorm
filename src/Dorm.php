@@ -4,6 +4,21 @@ namespace Ahmedkhd\Dorm;
 use Ahmedkhd\Dorm\Core;
 use Ahmedkhd\Dorm\Config;
 
+if( ! defined('ACCEPTED') ) 
+    define('ACCEPTED', 0);
+
+if( ! defined('WRONG_ANSWER') ) 
+    define('WRONG_ANSWER', 1);
+
+if( ! defined('TIME_LIMIT_EXCEEDED') ) 
+    define('TIME_LIMIT_EXCEEDED', 2);
+
+if( ! defined('COMPILER_ERROR') ) 
+    define('COMPILER_ERROR', 3);
+
+if( ! defined('DS') ) 
+    define('DS', DIRECTORY_SEPARATOR);
+
 class Dorm extends Core{
     /**
      * this function will create a temp cpp file to run the code and will return the response
