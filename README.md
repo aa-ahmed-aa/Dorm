@@ -21,7 +21,7 @@ First you need to install c/c++ compiler gcc/g++ and configure their paths in th
 ## :flashlight: Usage 
 First you need to `setCompilationPath` in this path the package will create files of the code and compile and run your code <br>
 so let's compile and run your first cpp code
-```
+```php
 require ('vendor/autoload.php');
 use Ahmedkhd\Dorm\Dorm;
 
@@ -32,7 +32,7 @@ $obj->setCompilationPath( __DIR__ );
 echo $obj->getCompilationPath();
 ``` 
 Now lets compile some cpp stuff
-```
+```php
 $cpp_code = <<<'EOT'
 	#include<iostream>
 	using namespace std;
@@ -43,8 +43,8 @@ $cpp_code = <<<'EOT'
 	    return 0;
 				}
 EOT;
-	$comp = $obj->compile( cpp_code, 'c++' );
-	echo ($comp ? "success" : "fail" ) ;
+$comp = $obj->compile( cpp_code, 'c++' );
+echo ($comp ? "success" : "fail" ) ;
 ```
 
 ## :electric_plug: Add your compiler 
