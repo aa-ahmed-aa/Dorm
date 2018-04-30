@@ -8,7 +8,7 @@ to your `composer.json` file add this to your require list
 ```
 {
     "require": {
-        "aa-ahmed-aa/dorm": "~1.0"
+        "aa-ahmed-aa/dorm": "~1.1"
     }
 }
 ```
