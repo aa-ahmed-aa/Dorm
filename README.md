@@ -57,5 +57,5 @@ This package is designed to handle compile/run of any other compilers in your pr
 		]
 	];
 ```
-## Liscence
+## License
 The MIT License (MIT). Please see [License](https://github.com/aa-ahmed-aa/Dorm/blob/master/LICENSE) File for more information.
