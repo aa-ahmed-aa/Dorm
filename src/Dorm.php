@@ -19,26 +19,26 @@ if( ! defined('COMPILER_ERROR') )
 if( ! defined('DS') ) 
     define('DS', DIRECTORY_SEPARATOR);
 
-class Dorm extends Core{
+class Dorm extends Core
+{
     /**
      * this function will create a temp cpp file to run the code and will return the response
      * @param $code => the code cpp or java
      * @param $compiler => compiler we will use to compile this code
      * @return bool => true if the code run successfuly, false otherwise
      */
-    public function compile( $code, $compiler )
+    public function compile($code, $compiler)
     {
-        
         $com_conf = Config::getCompiler($compiler);
         
         //put the code in a random file
         $file_extension = $com_conf['file_extension'];
 
-        $random_name = rand(0,999999) . "_" . time() . $file_extension ;
+        $random_name = rand(0, 999999) . "_" . time() . $file_extension;
 
         $file_name = $this->getCompilationPath() . DS . $random_name ;
 
-        file_put_contents( $file_name, $code );
+        file_put_contents($file_name, $code);
 
         $executable = $this->getCompilationPath() . DS . "program.exe";
 
@@ -48,9 +48,9 @@ class Dorm extends Core{
         $command = $compiler_path . " -o ". $executable ." ".$file_name." 2>&1";
 
         //i did not use Core::runCommand because its not build for compilation
-        exec( $command , $output, $status);
+        exec($command, $output, $status);
 
-        return ( empty($output) ? true : false );
+        return (empty($output) ? true : false);
     }
 
     /**
@@ -59,7 +59,7 @@ class Dorm extends Core{
      * @return string => return the output of the run "Accepted" or "Wrong Answer" to the
      * matched test cases or "Compilation error" if not compiled
      */
-    public function run($input_file , $output_file)
+    public function run($input_file, $output_file)
     {
         //write input file to disk
         file_put_contents($this->getCompilationPath() . DS . $input_file['file_name'], $input_file['file_content']);
@@ -69,12 +69,12 @@ class Dorm extends Core{
         $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
         $output = $this->runCommand($command);
 
-        if($output == TIME_LIMIT_EXCEEDED)
+        if ($output == TIME_LIMIT_EXCEEDED) {
             return TIME_LIMIT_EXCEEDED;
+        }
 
         //error happened while run
-        if( ! empty($output) )
-        {
+        if (!empty($output)) {
             return WRONG_ANSWER;
         }
 
@@ -83,18 +83,14 @@ class Dorm extends Core{
         $user_output = file_get_contents($output_file_name);
         $correct_output = $output_file['file_content'];
 
-        // die( "\nthis is user out\n" . $user_output . "\nthis is the correct out\n" . $correct_output );
-
-        if( strcmp($user_output, $correct_output) == 0 )
-        {
+        if (strcmp($user_output, $correct_output) == 0) {
             $this->cleanCompilationFolder([$output_file_name]);
+
             return ACCEPTED;
         }
 
         $this->cleanCompilationFolder([$output_file_name]);
+
         return WRONG_ANSWER;
     }
-
-    
 }
-?>

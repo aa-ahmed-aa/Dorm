@@ -1,7 +1,7 @@
 <?php
 namespace Ahmedkhd\Dorm;
 
-if( ! defined('ACCEPTED') ) 
+if( ! defined('ACCEPTED') )
     define('ACCEPTED', 0);
 
 if( ! defined('WRONG_ANSWER') ) 
@@ -16,9 +16,9 @@ if( ! defined('COMPILER_ERROR') )
 if( ! defined('DS') ) 
     define('DS', DIRECTORY_SEPARATOR);
 
-Class Core{
-
-	 private $compilationPath;
+class Core
+{
+    private $compilationPath;
 
     /**
      * Set the compilation path and create it if not existed
@@ -30,7 +30,6 @@ Class Core{
         $this->createFolderIfNotExisted($path);
     
         $this->compilationPath = $path;
-    
     }
 
     /**
@@ -39,9 +38,7 @@ Class Core{
      */
     public function getCompilationPath()
     {
-
         return $this->compilationPath;
-    
     }
 
     /**
@@ -50,12 +47,9 @@ Class Core{
      */
     public function createFolderIfNotExisted($path)
     {
-        
-        if(!file_exists($path))
-        {
+        if (!file_exists($path)) {
             mkdir($path);
         }
-
     }
 
     /**
@@ -64,13 +58,11 @@ Class Core{
      */
     public function cleanCompilationFolder($files_to_delete)
     {
-           foreach($files_to_delete as $file)
-           {
-
-               if(file_exists($file))
-                    unlink($file);
-           
-           }
+        foreach ($files_to_delete as $file) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
     }
 
     /**
@@ -80,7 +72,7 @@ Class Core{
      */
     public function runCommand($command)
     {
-        $descriptorspec = array(
+        $descriptorSpec = array(
             
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
             
@@ -94,21 +86,16 @@ Class Core{
 
         $output = '';
         
-        $process = proc_open($command, $descriptorspec, $pipes);
+        $process = proc_open($command, $descriptorSpec, $pipes);
 
         sleep(2);
         
-        if( strpos(shell_exec("tasklist"), "program.exe") )
-        {
-
+        if (strpos(shell_exec("tasklist"), "program.exe")) {
             system("taskkill /im program.exe /f");
-            
+
             return TIME_LIMIT_EXCEEDED;
-        
         }
 
         return $output;
-    
     }
 }
-?>
