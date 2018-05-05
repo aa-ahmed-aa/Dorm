@@ -14,9 +14,15 @@ to your `composer.json` file add this to your require list
 ```
 then run `composer update`
 ## :hammer: Configuration 
-First you need to install c/c++ compiler gcc/g++ and configure their paths in the package<br>
+First you need to install c/c++ and java and python compilers and configure their paths in the package<br>
+#### C++
 - you can find the MinGW compiler <a href="https://nuwen.net/mingw.html">Here</a><br>
 - after you download the compiler files copy the `MinGW` folder to your `C://` drive<br>
+#### Java
+- install jdk and configure the path in your environment variables you can find the judk <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Here</a><br>
+#### Python
+- install python from <a href="https://www.python.org/downloads/">Here</a> 
+- if you want this package to handle both versions of `python2.ء` and `python3.x` the package already do this and you can look at <a href="https://stackoverflow.com/a/4621277/5701752">This Question</a> to cnfigure both of them on the command line  
 
 ## :flashlight: Usage 
 First you need to `setCompilationPath` in this path the package will create files of the code and compile and run your code <br>
