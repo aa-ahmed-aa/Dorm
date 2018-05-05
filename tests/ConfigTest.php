@@ -50,14 +50,13 @@ class ConfigTest extends \PHPUnit_Framework_TestCase{
 			"python2" => [
 				"path" => "C:\Python27\python2.exe",      // if you use environment variables use python2 without the complete path
 				"file_extension" => ".py",
-				"run_func" => "runPython"
+				"compile_func" => "runPython"
 			],
 			"python3" => [
 				"path" => "C:\Python34\python3.exe",       // if you use environment variables use python3 without the complete path
 				"file_extension" => ".py",
-				"run_func" => "runPython"
+				"compile_func" => "runPython"
 			]
-
 		];
 
 		foreach($compilers as $key => $compiler)
