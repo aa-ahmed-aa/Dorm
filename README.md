@@ -58,8 +58,7 @@ EOT;
 //java
 $java_code = <<<'EOT'
 	public class Main {
-
-    public static void main(String[] args) {
+	public static void main(String[] args) {
         // Prints "Hello, World" to the terminal window.
         System.out.println("Hello, Java");
     }
@@ -80,12 +79,12 @@ $python_code = <<<'EOT'
 print "Hello, Python3.4"
 EOT;
 
-	$comp = $obj->compile( $python_code, "python2" );
-	echo "Running : " . implode( $comp )  . "\n";
+$comp = $obj->compile( $python_code, "python2" );
+echo "Running : " . implode( $comp )  . "\n";
 ```
 
 ## :electric_plug: Add your compiler 
-This package is designed to handle compile/run of any other compilers in your project so you can check this class `src/Config.php` and add your configurations<br>
+This package is designed to handle compile/run of any other compilers in your project <br>
 ```php
 	$compilers = [
 		"__COMPILER_NAME__"=>[
@@ -97,8 +96,8 @@ This package is designed to handle compile/run of any other compilers in your pr
 	];
 ```
 ##### Steps
--Add your customized key for your configuration to use it later in your compile and run function see `src/Config.php`.
--Add run and compile functions for your compiler as you named in the configuration array.
--Test and Bom your compiler is there.
+-Add your customized key for your configuration to use it later in your compile and run function see `src/Config.php`.<br>
+-Add run and compile functions for your compiler as you named in the configuration array.<br>
+-Test and Bom your compiler is there.<br>
 ## License
 The MIT License (MIT). Please see [License](https://github.com/aa-ahmed-aa/Dorm/blob/master/LICENSE) File for more information.
