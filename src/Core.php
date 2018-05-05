@@ -47,7 +47,7 @@ Class Core{
     {
 
         return $this->compilationPath;
-    
+        
     }
 
     /**
@@ -91,11 +91,7 @@ Class Core{
         $com_conf = Config::getCompilerConfigs($compiler);
         
         //put the code in a random file
-        $file_extension = $com_conf['file_extension'];
-
-        $random_name = rand(0,999999) . "_" . time() . $file_extension ;
-
-        $file_name = $this->getCompilationPath() . DS . $random_name ;
+        $file_name = $this->getCompilationPath() . DS . rand(0,999999) . "_" . time() . $com_conf['file_extension']; ;
 
         file_put_contents( $file_name, $code );
 
@@ -160,6 +156,73 @@ Class Core{
 
         $this->cleanCompilationFolder([$output_file_name]);
         return WRONG_ANSWER;
+    }
+
+    /*
+    * this function will compile the java code
+    */
+    public function compileJava( $code, $compiler )
+    {
+        $this->setCompiler( $compiler );
+
+        $compiler_configs = Config::getCompilerConfigs($compiler);
+
+        //save the code in a file with that extension
+        $file_name =  $this->getCompilationPath() . DS . $compiler_configs['main_class'] . $compiler_configs['file_extension'] ;     
+
+        file_put_contents( $file_name, $code );
+
+        //run the command that compiles the code in that file
+        $command = $compiler_configs['path_compile'] . " " . $file_name . " 2>&1";
+
+        //i did not use Core::runCommand because its not build for compilation
+        exec( $command , $output, $status);
+
+        return ( empty($output) ? true : $output );
+    }
+
+    /*
+    * this function will compile the java code
+    */
+    public function runJava( $input_file = NULL, $output_file = NULL )
+    {
+        $configs = Config::getCompilerConfigs( $this->getCompiler() );
+        
+        if( $input_file == NULL && $output_file == NULL )
+        {
+            //get the class name and run it using java command
+            $command = "cd " . $this->getCompilationPath() . DS . " & ";
+            $command .= $configs['path_run'] . " " . $configs['main_class'] . " 2>&1";
+            $output = exec($command);
+
+            return $output;
+        }
+
+    }    
+
+
+    /**
+    * this function will run the java code
+    */
+    public function runPython( $code, $compiler )
+    {
+        // put the code in a  random file with .py extension
+        $this->setCompiler( $compiler );
+        // die($code);
+        $compiler_configs = Config::getCompilerConfigs($compiler);
+        
+        //put the code in a random file
+        $file_name = $this->getCompilationPath() . DS . rand(0,999999) . "_" . time() . $compiler_configs['file_extension']; ;
+
+        file_put_contents( $file_name, $code );
+
+        //run code and return output
+        $command =  $compiler_configs['path'] . " " . $file_name;
+
+        exec( $command , $output, $status);
+
+        return ( empty($output) ? true : $output );
+
     }
 
     /**
