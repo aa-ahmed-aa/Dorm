@@ -3,12 +3,6 @@ namespace Ahmedkhd\Dorm\Test;
 
 use Ahmedkhd\Dorm\Core;
 
-if( ! defined('DS') ) 
-	define('DS', DIRECTORY_SEPARATOR);
-
-if( ! defined('TEST_COMPILER_DIR') ) 
-	define('TEST_COMPILER_DIR', __DIR__ . DS . 'testDir' );
-
 class CoreTest extends \PHPUnit_Framework_TestCase{
 	
 	/**

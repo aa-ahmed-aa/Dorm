@@ -65,10 +65,10 @@ EOT;
 	$obj->setCompilationPath( TEST_COMPILER_DIR );
 	
 	//check if compilation is ok or have errors
-	$comp = $obj->compile( $correct_code, 'c++' );
+	$comp = $obj->compile( $correct_code, 'cpp' );
 	$this->assertTrue( $comp );
 
-	$comp = $obj->compile( $syntax_error, 'c++');
+	$comp = $obj->compile( $syntax_error, 'cpp');
 	$this->assertTrue( ! $comp );
 
   	}
@@ -128,7 +128,7 @@ EOD;
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
 		//compile
-		$comp = $obj->compile( $correct_code, 'c++' );
+		$comp = $obj->compile( $correct_code, 'cpp' );
 		$this->assertTrue( $comp );
 
 		//test eccepted
@@ -186,7 +186,7 @@ EOD;
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
 		//compile
-		$comp = $obj->compile( $correct_code, 'c++' );
+		$comp = $obj->compile( $correct_code, 'cpp' );
 		$this->assertTrue( $comp );
 
 		//test wrong_answer
@@ -244,7 +244,7 @@ EOD;
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
 		//test time_limit_exceeded
-		$comp = $obj->compile( $time_limit_code, 'c++' );
+		$comp = $obj->compile( $time_limit_code, 'cpp' );
 		$this->assertTrue( $comp );
 
 		$time = $obj->run( $input_file, $correct_output_file );
