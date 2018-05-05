@@ -36,6 +36,7 @@ EOT;
 }
 EOT;
 
+
 	$comp = $obj->compile( $java_code, "java" );
 	echo "Compilation : " . ( ! is_array($comp) ? "Success" : "Fail" )  . "\n";
 	echo "Running is : " . ( ! is_array($comp) ? $obj->run() : "Fail" ) . "\n";
