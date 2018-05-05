@@ -14,7 +14,7 @@ to your `composer.json` file add this to your require list
 ```
 then run `composer update`
 ## :hammer: Configuration 
-First you need to install c/c++ and java and python compilers and configure their paths in the package<br>
+First you need to install compilers and configure their paths in `src/Config.php`<br>
 #### C++
 - you can find the MinGW compiler <a href="https://nuwen.net/mingw.html">Here</a><br>
 - after you download the compiler files copy the `MinGW` folder to your `C://` drive<br>
