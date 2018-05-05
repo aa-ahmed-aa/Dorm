@@ -8,7 +8,7 @@ to your `composer.json` file add this to your require list
 ```
 {
     "require": {
-        "aa-ahmed-aa/dorm": "~1.0"
+        "aa-ahmed-aa/dorm": "~1.1"
     }
 }
 ```
@@ -57,5 +57,5 @@ This package is designed to handle compile/run of any other compilers in your pr
 		]
 	];
 ```
-## Liscence
+## License
 The MIT License (MIT). Please see [License](https://github.com/aa-ahmed-aa/Dorm/blob/master/LICENSE) File for more information.
