@@ -22,7 +22,7 @@ First you need to install compilers and configure their paths in `src/Config.php
 - install jdk and configure the path in your environment variables you can find the judk <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Here</a><br>
 #### Python
 - install python from <a href="https://www.python.org/downloads/">Here</a> 
-- if you want this package to handle both versions of `python2.ء` and `python3.x` the package already do this and you can look at <a href="https://stackoverflow.com/a/4621277/5701752">This Question</a> to cnfigure both of them on the command line  
+- if you want this package to handle both versions of `python2.x` and `python3.x` the package already do this and you can look at <a href="https://stackoverflow.com/a/4621277/5701752">This Question</a> to cnfigure both of them on the command line  
 
 ## :flashlight: Usage 
 First you need to `setCompilationPath` in this path the package will create files of the code and compile and run your code <br>
