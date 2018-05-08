@@ -4,14 +4,14 @@
 	</p>
 
 	<p style="background-color: #F6F8FA;border-radius: 7px;">
-		&nbsp;require ('vendor/autoload.php');<br>
-		&nbsp;use Ahmedkhd\Dorm\Dorm;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;require ('vendor/autoload.php');<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;use Ahmedkhd\Dorm\Dorm;<br>
 <br>
-		&nbsp;$obj = new Dorm();<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;$obj = new Dorm();<br>
 <br>
-		&nbsp;//set compilation path<br>
-		&nbsp;$obj->setCompilationPath( __DIR__ );<br>
-		&nbsp;echo $obj->getCompilationPath();<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;//set compilation path<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;$obj->setCompilationPath( __DIR__ );<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;echo $obj->getCompilationPath();<br>
 	</p>
 
 Now lets compile and run some real code
@@ -20,19 +20,19 @@ Now lets compile and run some real code
 here we compile and run c++ code and print the result
 
 <p style="background-color: #F6F8FA;border-radius: 7px;">
-	&nbsp;&nbsp;&nbsp;&nbsp;$cpp_code = <<<'EOT'
-	&nbsp;&nbsp;&nbsp;&nbsp;#include<iostream><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;$cpp_code = <<<'EOT'<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;#include< iostream > <br>
 	&nbsp;&nbsp;&nbsp;&nbsp;using namespace std;<br>
 <br>
 	&nbsp;&nbsp;&nbsp;&nbsp;int main()<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout<<"hello, c plus plus";<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;}
-	&nbsp;&nbsp;&nbsp;&nbsp;EOT;
-	
-	&nbsp;&nbsp;&nbsp;&nbsp;$comp = $obj->compile( $cpp_code, "cpp" );
-	&nbsp;&nbsp;&nbsp;&nbsp;echo "Compilation : " . ( ! is_array($comp) ? "Success" : "Fail" )  . "\n";
+	&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;EOT;<br>
+	<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;$comp = $obj->compile( $cpp_code, "cpp" );<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;echo "Compilation : " . ( ! is_array($comp) ? "Success" : "Fail" )  . "\n";<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;echo "Running is : " . ( ! is_array($comp) ? $obj->run() : "Fail" ) . "\n";
 </p>
 
@@ -43,7 +43,7 @@ here we compile and run c++ code and print the result
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public class Main {<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String[] args) {<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Prints "Hello, World" to the terminal window.<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, Java");<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello, Java");<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 	<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
