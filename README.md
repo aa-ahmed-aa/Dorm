@@ -103,8 +103,6 @@ This package is designed to handle compile/run of any other compilers in your pr
 ```
 ##### Steps
 - Add your customized key for your configuration to use it later in your compile and run function see `src/Config.php`.<br>
-    - add 
-    - edit
 - Add run and compile functions for your compiler as you named in the configuration array.<br>
 - Test and Bom your compiler is there.<br>
 ## License
