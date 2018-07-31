@@ -90,6 +90,8 @@ echo "Running : " . implode( $comp )  . "\n";
 ```
 
 ## :electric_plug: Add your compiler 
+You can check this <a href="https://dev.to/aaahmedaa/dorm-introducing-multi-compiler-package--for-php-15m6">blog post</a> for more information.<br>
+<br>
 This package is designed to handle compile/run of any other compilers in your project <br>
 ```php
 	$compilers = [
