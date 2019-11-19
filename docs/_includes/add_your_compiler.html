@@ -1,0 +1,26 @@
+<div style="padding-left: 50px;">
+	This package is designed to handle compile/run of any other compilers in your project 
+	<p style="background-color: #F6F8FA;border-radius: 7px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;$compilers = [<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"__COMPILER_NAME__"=>[<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"path" => "__COMPILER_PATH__",<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file_extension" =>'__CODE_FILE_EXTENSION_',<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"compile_func" => __NAME_FOR_YOUR_COMPILER_FUNCTION__,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"run_func" => __NAME_FOR_YOUR_RUN_FUNCTION__ <br>	
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;];
+	</p>
+	<h4>Steps</h4>
+	<ul>
+		<ol>
+			-Add your customized key for your configuration to use it later in your compile and run function see src/Config.php.
+		</ol>
+		<ol>
+			-Add run and compile functions for your compiler as you named in the configuration array.
+		</ol>
+		<ol>
+			-Test and Bom your compiler is there.
+		</ol>
+	</ul>
+
+</div>

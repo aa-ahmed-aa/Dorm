@@ -1,0 +1,5 @@
+name: AhmedKhaled
+markdown: kramdown
+permalink: /dorm/:title
+kramdown:
+  parse_block_html: true

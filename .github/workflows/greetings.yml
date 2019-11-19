@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Good issue you are awesome man keep up and follow to solve this one'
+        pr-message: 'This PR is awesome can you follow up untill you it is merged and i will get you a coffee when it happened'
