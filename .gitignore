@@ -3,3 +3,4 @@ composer.lock
 .DS_Store
 error-output.txt
 *.cpp
+.idea/
