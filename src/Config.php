@@ -2,7 +2,7 @@
 namespace Ahmedkhd\Dorm;
 
 class Config{
-	
+
 	public static function getCompilerConfigs( $compiler = null )
 	{
 		$compilers = [
@@ -19,7 +19,7 @@ class Config{
 				"run_func" => "runCAndCPP"
 			],
 			"java" => [
-				"path_compile" => "javac",      // make sure you did this TODO you must add path to jdk/bin to your environment variable     
+				"path_compile" => "javac",      // make sure you did this TODO you must add path to jdk/bin to your environment variable
 				"path_run" => "java",           // make sure you did this TODO you must add path to jdk/bin to your environment variable
 				"main_class" => "Main",
 				"file_extension" => ".java",
@@ -38,7 +38,9 @@ class Config{
 			]
 		];
 
-		return ( $compiler != null ? $compilers[$compiler] : ( $this->getCompiler() != null ? $compilers[ $this->getCompiler() ] : $compilers ) );
+		return ( $compiler != null ?
+			$compilers[$compiler] :
+			( $this->getCompiler() != null ? $compilers[ $this->getCompiler() ] : $compilers ) );
 	}
 }
 ?>

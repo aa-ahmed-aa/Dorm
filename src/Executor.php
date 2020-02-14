@@ -27,6 +27,4 @@ class Executor extends Core
         $func = Config::getCompilerConfigs($this->getCompiler())['run_func'];
         return $this->$func($input_file, $output_file);
     }
-
-
 }
