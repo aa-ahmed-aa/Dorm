@@ -1,21 +1,22 @@
-<?php 
+<?php
 namespace Ahmedkhd\Dorm\Test;
 
-use Ahmedkhd\Dorm\Dorm;
+use Ahmedkhd\Dorm\Executor;
+use PHPUnit\Framework\TestCase;
 
-class DormTest extends \PHPUnit_Framework_TestCase{
+class ExecutorTest extends TestCase{
 
 	public function tearDown()
 	{
 		foreach( glob( TEST_COMPILER_DIR . "\*.*" ) as $file )
 		{
-	
+
 			unlink( $file );
-	
+
 		}
 
 		rmdir(TEST_COMPILER_DIR);
-	
+
 	}
 
 	/**
@@ -23,7 +24,7 @@ class DormTest extends \PHPUnit_Framework_TestCase{
 	*/
 	public function testIsThereAnySyntaxError(){
 
-	  	$var = new Dorm();
+	  	$var = new Executor();
 
 	  	$this->assertTrue(is_object($var));
 
@@ -32,7 +33,7 @@ class DormTest extends \PHPUnit_Framework_TestCase{
   	}
 
   	/*
-  	* @test Dorm::compile code
+  	* @test Executor::compile code
   	*/
   	public function test_compile()
   	{
@@ -60,10 +61,10 @@ EOT;
 				}
 EOT;
 
-	$obj = new Dorm();
+	$obj = new Executor();
 
 	$obj->setCompilationPath( TEST_COMPILER_DIR );
-	
+
 	//check if compilation is ok or have errors
 	$comp = $obj->compile( $correct_code, 'cpp' );
 	$this->assertTrue( $comp );
@@ -74,7 +75,7 @@ EOT;
   	}
 
 	/**
-	* 
+	*
 	*/
   	public function test_run_accepted()
 	{
@@ -122,8 +123,8 @@ int main()
     return 0;
 }
 EOD;
-		
-		$obj = new Dorm();
+
+		$obj = new Executor();
 
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
@@ -133,7 +134,7 @@ EOD;
 
 		//test eccepted
 		$run = $obj->run($input_file, $correct_output_file);
-		$this->assertTrue( $run == ACCEPTED );		
+		$this->assertTrue( $run == ACCEPTED );
 	}
 
 	public function test_run_wrong_answer()
@@ -182,7 +183,7 @@ EOD;
 		}
 EOD;
 
-		$obj = new Dorm();
+		$obj = new Executor();
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
 		//compile
@@ -240,7 +241,7 @@ EOD;
 		}
 EOD;
 
-		$obj = new Dorm();
+		$obj = new Executor();
 		$obj->setCompilationPath( TEST_COMPILER_DIR );
 
 		//test time_limit_exceeded

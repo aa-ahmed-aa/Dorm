@@ -2,9 +2,10 @@
 namespace Ahmedkhd\Dorm\Test;
 
 use Ahmedkhd\Dorm\Core;
+use PHPUnit\Framework\TestCase;
 
-class CoreTest extends \PHPUnit_Framework_TestCase{
-	
+class CoreTest extends TestCase{
+
 	/**
 	* this will check for any syntax error
 	*/
@@ -25,11 +26,11 @@ class CoreTest extends \PHPUnit_Framework_TestCase{
 	{
 
 		$obj = new Core();
-		
+
 		$obj->createFolderIfNotExisted( TEST_COMPILER_DIR );
 
 		$this->assertTrue( file_exists( TEST_COMPILER_DIR ) );
-		
+
 	}
 
 	/**
@@ -47,7 +48,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase{
 		$gotten_path = $c->getCompilationPath();
 
 		$this->assertTrue( $gotten_path === TEST_COMPILER_DIR );
-		
+
 	}
 
 	/**
@@ -55,9 +56,9 @@ class CoreTest extends \PHPUnit_Framework_TestCase{
 	*/
 	public function test_clean_compilation_folder()
 	{
-		
+
 		$c = new Core();
-		
+
 		$c->createFolderIfNotExisted( TEST_COMPILER_DIR );
 
 		touch( TEST_COMPILER_DIR . '\ahmed.test' );
@@ -77,7 +78,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase{
 	{
 
 		//this test should test for one specific task it's programe.exe
-		//and will close this task after 5 seconds 
+		//and will close this task after 5 seconds
 		//and it will check for the output of this executable
 
 	}
