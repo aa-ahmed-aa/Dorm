@@ -1,18 +1,16 @@
 <?php
 namespace Ahmedkhd\Dorm;
 
-require_once("list_of_defines.php");
-
-Class Core{
-
-	private $compilationPath;
+class Core
+{
+    private $compilationPath;
     private $compiler;
 
     /*
     * Set the compiler
     * @param $compiler => compiler of the current code
     */
-    public function setCompiler( $compiler )
+    public function setCompiler($compiler)
     {
         $this->compiler = $compiler;
     }
@@ -32,11 +30,8 @@ Class Core{
      */
     public function setCompilationPath($path)
     {
-    
         $this->createFolderIfNotExisted($path);
-    
         $this->compilationPath = $path;
-    
     }
 
     /**
@@ -45,9 +40,7 @@ Class Core{
      */
     public function getCompilationPath()
     {
-
         return $this->compilationPath;
-        
     }
 
     /**
@@ -56,12 +49,9 @@ Class Core{
      */
     public function createFolderIfNotExisted($path)
     {
-        
-        if(!file_exists($path))
-        {
+        if (!file_exists($path)) {
             mkdir($path);
         }
-
     }
 
     /**
@@ -70,52 +60,45 @@ Class Core{
      */
     public function cleanCompilationFolder($files_to_delete)
     {
-           foreach($files_to_delete as $file)
-           {
-
-               if(file_exists($file))
-                    unlink($file);
-           
-           }
+        foreach ($files_to_delete as $file) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
     }
 
     /*
-    * only compiles the c/cpp fiels 
+    * only compiles the c/cpp fiels
     * @param $code => the code to compile
-    * @param $compiler => the compile it self whether it is c or cpp 
+    * @param $compiler => the compile it self whether it is c or cpp
     */
-    public function compileCAndCPP( $code, $compiler )
+    public function compileCAndCPP($code, $compiler)
     {
-        $this->setCompiler( $compiler );
-
+        $this->setCompiler($compiler);
         $com_conf = Config::getCompilerConfigs($compiler);
-        
+
         //put the code in a random file
-        $file_name = $this->getCompilationPath() . DS . rand(0,999999) . "_" . time() . $com_conf['file_extension']; ;
-
-        file_put_contents( $file_name, $code );
-
+        $file_name = $this->getCompilationPath().DS.rand(0, 999999)."_".time().$com_conf['file_extension'];
+        file_put_contents($file_name, $code);
         $executable = $this->getCompilationPath() . DS . "program.exe";
 
         //construct the command based on the compiler
         $compiler_path = $com_conf['path'];
-        
         $command = $compiler_path . " -o ". $executable ." ".$file_name." 2>&1";
 
         //i did not use Core::runCommand because its not build for compilation
-        exec( $command , $output, $status);
+        exec($command, $output, $status);
 
         return ( empty($output) ? true : false );
     }
 
     /*
     * runs the c and cpp files
-    * @param  
+    * @param
     */
-    public function runCAndCPP( $input_file = NULL, $output_file = NULL )
+    public function runCAndCPP($input_file = null, $output_file = null)
     {
-        if( $input_file == NULL && $output_file == NULL )
-        {
+        if ($input_file == null && $output_file == null) {
              //execute the .exe file
             $command = "cd " . $this->getCompilationPath() . DS . " & ";
             $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
@@ -132,12 +115,12 @@ Class Core{
         $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
         $output = $this->runCommand($command);
 
-        if($output == TIME_LIMIT_EXCEEDED)
+        if ($output == TIME_LIMIT_EXCEEDED) {
             return TIME_LIMIT_EXCEEDED;
+        }
 
         //error happened while run
-        if( ! empty($output) )
-        {
+        if (!empty($output)) {
             return WRONG_ANSWER;
         }
 
@@ -148,8 +131,7 @@ Class Core{
 
         // die( "\nthis is user out\n" . $user_output . "\nthis is the correct out\n" . $correct_output );
 
-        if( strcmp($user_output, $correct_output) == 0 )
-        {
+        if (strcmp($user_output, $correct_output) == 0) {
             $this->cleanCompilationFolder([$output_file_name]);
             return ACCEPTED;
         }
@@ -161,22 +143,20 @@ Class Core{
     /*
     * this function will compile the java code
     */
-    public function compileJava( $code, $compiler )
+    public function compileJava($code, $compiler)
     {
-        $this->setCompiler( $compiler );
-
+        $this->setCompiler($compiler);
         $compiler_configs = Config::getCompilerConfigs($compiler);
 
         //save the code in a file with that extension
-        $file_name =  $this->getCompilationPath() . DS . $compiler_configs['main_class'] . $compiler_configs['file_extension'] ;     
-
-        file_put_contents( $file_name, $code );
+        $file_name =  $this->getCompilationPath() . DS . $compiler_configs['main_class'] . $compiler_configs['file_extension'] ;
+        file_put_contents($file_name, $code);
 
         //run the command that compiles the code in that file
         $command = $compiler_configs['path_compile'] . " " . $file_name . " 2>&1";
 
         //i did not use Core::runCommand because its not build for compilation
-        exec( $command , $output, $status);
+        exec($command, $output, $status);
 
         return ( empty($output) ? true : $output );
     }
@@ -184,12 +164,11 @@ Class Core{
     /*
     * this function will compile the java code
     */
-    public function runJava( $input_file = NULL, $output_file = NULL )
+    public function runJava($input_file = null, $output_file = null)
     {
-        $configs = Config::getCompilerConfigs( $this->getCompiler() );
-        
-        if( $input_file == NULL && $output_file == NULL )
-        {
+        $configs = Config::getCompilerConfigs($this->getCompiler());
+
+        if ($input_file == null && $output_file == null) {
             //get the class name and run it using java command
             $command = "cd " . $this->getCompilationPath() . DS . " & ";
             $command .= $configs['path_run'] . " " . $configs['main_class'] . " 2>&1";
@@ -197,32 +176,31 @@ Class Core{
 
             return $output;
         }
-
-    }    
+    }
 
 
     /**
     * this function will run the java code
     */
-    public function runPython( $code, $compiler )
+    public function runPython($code, $compiler)
     {
         // put the code in a  random file with .py extension
-        $this->setCompiler( $compiler );
+        $this->setCompiler($compiler);
+
         // die($code);
         $compiler_configs = Config::getCompilerConfigs($compiler);
-        
-        //put the code in a random file
-        $file_name = $this->getCompilationPath() . DS . rand(0,999999) . "_" . time() . $compiler_configs['file_extension']; ;
 
-        file_put_contents( $file_name, $code );
+        //put the code in a random file
+        $file_name = $this->getCompilationPath() . DS . rand(0, 999999) . "_" . time() . $compiler_configs['file_extension'];
+
+        file_put_contents($file_name, $code);
 
         //run code and return output
         $command =  $compiler_configs['path'] . " " . $file_name;
 
-        exec( $command , $output, $status);
+        exec($command, $output, $status);
 
         return ( empty($output) ? true : $output );
-
     }
 
     /**
@@ -233,34 +211,19 @@ Class Core{
     public function runCommand($command)
     {
         $descriptorspec = array(
-            
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-            
             1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-            
             2 => array("file", "error-output.txt", "a") // stderr is a file to write to
-
         );
 
         $time = time();
-
         $output = '';
-        
         $process = proc_open($command, $descriptorspec, $pipes);
-
         sleep(2);
-        
-        if( strpos(shell_exec("tasklist"), "program.exe") )
-        {
-
+        if (strpos(shell_exec("tasklist"), "program.exe")) {
             system("taskkill /im program.exe /f");
-            
             return TIME_LIMIT_EXCEEDED;
-        
         }
-
         return $output;
-    
     }
 }
-?>
