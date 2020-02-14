@@ -1,4 +1,5 @@
-<phpunit 
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
          bootstrap="vendor/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
@@ -7,4 +8,9 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="true">
+    <testsuites>
+        <testsuite name="Test suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
