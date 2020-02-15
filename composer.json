@@ -4,7 +4,8 @@
     "keywords": ["command-line", "compilers", "c", "cpp","compiler-manager", "java", "javac", "python", "python2", "python3"],
     "license": "MIT",
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "coverage": "vendor/bin/phpunit --coverage-html cover"
     },
     "authors": [
         {
