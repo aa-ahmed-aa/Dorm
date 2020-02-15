@@ -3,6 +3,10 @@
     "description": "This is a compiler package for compiling and running c and cpp files this package is designed to can add any other compilers later.",
     "keywords": ["command-line", "compilers", "c", "cpp","compiler-manager", "java", "javac", "python", "python2", "python3"],
     "license": "MIT",
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "coverage": "vendor/bin/phpunit --coverage-html cover"
+    },
     "authors": [
         {
             "name": "Ahmed Khaled",
@@ -11,10 +15,10 @@
     ],
     "type": "package",
     "require": {
-		"php": ">=5.4"
+		"php": ">=7.1"
     },
 	"require-dev": {
-		"phpunit/phpunit": "5.2.*"
+        "phpunit/phpunit": "^6.5"
     },
 	"autoload": {
         "psr-4": {
@@ -23,7 +27,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Ahmedkhd\\Dorm\\Test\\": "tests"
+            "Ahmedkhd\\Dorm\\Test\\": "tests/"
         }
     }
 }

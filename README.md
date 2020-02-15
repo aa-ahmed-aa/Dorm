@@ -31,7 +31,7 @@ so let's compile and run your first cpp code
 require ('vendor/autoload.php');
 use Ahmedkhd\Dorm\Dorm;
 
-$obj = new Dorm();
+$obj = new Executor();
 
 //set compilation path
 $obj->setCompilationPath( __DIR__ );

@@ -1,5 +1,6 @@
 vendor/
 examples/cache
+cover/
 composer.lock
 .DS_Store
 error-output.txt
