@@ -6,19 +6,27 @@ class Core
     private $compilationPath;
     private $compiler;
 
-    /*
-    * Set the compiler
-    * @param $compiler => compiler of the current code
-    */
+    /**
+     * Core constructor.
+     */
+    public function __construct()
+    {
+        require_once('./src/list_of_defines.php');
+    }
+
+    /**
+     * Set the compiler
+     * @param $compiler => compiler of the current code
+     */
     public function setCompiler($compiler)
     {
         $this->compiler = $compiler;
     }
 
-    /*
-    * Get the compiler
-    * @param $compiler => compiler of the current code
-    */
+    /**
+     * Get the compiler
+     * @return mixed
+     */
     public function getCompiler()
     {
         return $this->compiler;
@@ -67,11 +75,12 @@ class Core
         }
     }
 
-    /*
-    * only compiles the c/cpp fiels
-    * @param $code => the code to compile
-    * @param $compiler => the compile it self whether it is c or cpp
-    */
+    /**
+     * Only compiles the c/cpp fields
+     * @param $code => code to compile
+     * @param $compiler => used compiler
+     * @return bool
+     */
     public function compileCAndCPP($code, $compiler)
     {
         $this->setCompiler($compiler);
@@ -80,7 +89,7 @@ class Core
         //put the code in a random file
         $file_name = $this->getCompilationPath().DS.rand(0, 999999)."_".time().$com_conf['file_extension'];
         file_put_contents($file_name, $code);
-        $executable = $this->getCompilationPath() . DS . "program.exe";
+        $executable = $this->getCompilationPath() . DS . "program." . Config::getExecutableExtension('cpp');
 
         //construct the command based on the compiler
         $compiler_path = $com_conf['path'];
@@ -92,16 +101,18 @@ class Core
         return ( empty($output) ? true : false );
     }
 
-    /*
-    * runs the c and cpp files
-    * @param
-    */
+    /**
+     * Runs the c and cpp files
+     * @param null $input_file
+     * @param null $output_file
+     * @return bool|int|string
+     */
     public function runCAndCPP($input_file = null, $output_file = null)
     {
         if ($input_file == null && $output_file == null) {
              //execute the .exe file
             $command = "cd " . $this->getCompilationPath() . DS . " & ";
-            $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
+            $command .= $this->getCompilationPath() . DS . "program.".Config::getExecutableExtension('cpp')." 2>&1";
             $output = exec($command);
 
             return $output;
@@ -111,17 +122,11 @@ class Core
         file_put_contents($this->getCompilationPath() . DS . $input_file['file_name'], $input_file['file_content']);
 
         //execute the .exe file
-        $command = "cd " . $this->getCompilationPath() . DS . " & ";
-        $command .= $this->getCompilationPath() . DS . "program.exe 2>&1";
+        $command = $this->runStrategy();
         $output = $this->runCommand($command);
 
-        if ($output == TIME_LIMIT_EXCEEDED) {
+        if ($output === TIME_LIMIT_EXCEEDED) {
             return TIME_LIMIT_EXCEEDED;
-        }
-
-        //error happened while run
-        if (!empty($output)) {
-            return WRONG_ANSWER;
         }
 
         //compare the output file with user output file
@@ -140,9 +145,12 @@ class Core
         return WRONG_ANSWER;
     }
 
-    /*
-    * this function will compile the java code
-    */
+    /**
+     * This function will compile the java code
+     * @param $code
+     * @param $compiler
+     * @return bool
+     */
     public function compileJava($code, $compiler)
     {
         $this->setCompiler($compiler);
@@ -161,9 +169,12 @@ class Core
         return ( empty($output) ? true : $output );
     }
 
-    /*
-    * this function will compile the java code
-    */
+    /**
+     * This function will compile the java code
+     * @param null $input_file
+     * @param null $output_file
+     * @return string
+     */
     public function runJava($input_file = null, $output_file = null)
     {
         $configs = Config::getCompilerConfigs($this->getCompiler());
@@ -180,7 +191,7 @@ class Core
 
 
     /**
-    * this function will run the java code
+    * This function will run the java code
     */
     public function runPython($code, $compiler)
     {
@@ -204,11 +215,12 @@ class Core
     }
 
     /**
-     * this function will timeout after 5 second to handle the time limit exceeded
-     * @param $command => the command we will run
-     * @return string => return the time_limit_exceeded if the time is greater than 5 second
+     * This function will timeout after 5 second to handle the time limit exceeded
+     * @param $command => Command to run
+     * @param int $timeToSleep
+     * @return bool|int
      */
-    public function runCommand($command)
+    public function runCommand($command, $timeToSleep = 5)
     {
         $descriptorspec = array(
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
@@ -217,13 +229,48 @@ class Core
         );
 
         $time = time();
-        $output = '';
         $process = proc_open($command, $descriptorspec, $pipes);
-        sleep(2);
-        if (strpos(shell_exec("tasklist"), "program.exe")) {
-            system("taskkill /im program.exe /f");
+        sleep($timeToSleep);
+        //the task is still running
+        if (Config::isProcessStillRunning('program.'.Config::getExecutableExtension('cpp'))) {
+            $this->killProcess();
             return TIME_LIMIT_EXCEEDED;
         }
-        return $output;
+        return true;
+    }
+
+    /**
+     * Get Command based on the os and the compiler
+     * @return string
+     */
+    public function runStrategy()
+    {
+        switch (PHP_OS) {
+            case 'Linux':
+                return "cd " . $this->getCompilationPath().DS.
+                    " && .".DS."program.".Config::getExecutableExtension('cpp')." 2>&1";
+                break;
+            case 'Windows':
+                return "cd ".
+                    $this->getCompilationPath() . DS . " & ".
+                    $this->getCompilationPath() . DS . "program.".Config::getExecutableExtension('cpp')." 2>&1";
+                break;
+        }
+    }
+
+    /**
+     * Kill process strategy
+     */
+    public function killProcess()
+    {
+        switch (PHP_OS) {
+            case 'Linux':
+                $processToKill = shell_exec(Config::getProcessLister('program.'.Config::getExecutableExtension('cpp')) . ' 2>&1');
+                system(Config::getProcessKiller($this->getCompiler(), $processToKill));
+                break;
+            case 'Windows':
+                system(Config::getProcessKiller($this->getCompiler(), "program.exe"));
+                break;
+        }
     }
 }
