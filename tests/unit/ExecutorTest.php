@@ -2,6 +2,7 @@
 namespace Ahmedkhd\Dorm\Test;
 
 use Ahmedkhd\Dorm\Executor;
+use Ahmedkhd\Dorm\Helpers\CleanUpHelpers;
 use PHPUnit\Framework\TestCase;
 
 class ExecutorTest extends TestCase
@@ -10,7 +11,7 @@ class ExecutorTest extends TestCase
 
     public function setUp()
     {
-        require_once('./src/list_of_defines.php');
+        require_once('./src/Defines/list_of_defines.php');
         $this->deleteDirectory(TEST_COMPILER_DIR);
         mkdir(TEST_COMPILER_DIR);
     }
@@ -25,7 +26,7 @@ class ExecutorTest extends TestCase
     */
     public function testIsThereAnySyntaxError()
     {
-        $var = new Executor();
+        $var = new Executor(CPP);
         $this->assertTrue(is_object($var));
         unset($var);
     }
@@ -56,14 +57,14 @@ class ExecutorTest extends TestCase
 				}
             ';
 
-        $obj = new Executor();
+        $obj = new Executor(CPP);
         $obj->setCompilationPath(TEST_COMPILER_DIR);
 
         //check if compilation is ok or have errors
-        $comp = $obj->compile($correct_code, 'cpp');
+        $comp = $obj->compile($correct_code);
 
         $this->assertTrue($comp);
-        $comp = $obj->compile($syntax_error, 'cpp');
+        $comp = $obj->compile($syntax_error);
         $this->assertTrue(!$comp);
     }
 
@@ -111,14 +112,14 @@ class ExecutorTest extends TestCase
                 }
             ';
 
-        $obj = new Executor();
+        $obj = new Executor(CPP);
         $obj->setCompilationPath(TEST_COMPILER_DIR);
 
         //compile
-        $comp = $obj->compile($correct_code, 'cpp');
+        $comp = $obj->compile($correct_code);
         $this->assertTrue($comp);
 
-        //test eccepted
+        //test accepted
         $run = $obj->run($input_file, $correct_output_file);
         $this->assertTrue($run == ACCEPTED);
     }
@@ -168,11 +169,11 @@ class ExecutorTest extends TestCase
                     return 0;
                 }
             ';
-        $obj = new Executor();
+        $obj = new Executor(CPP);
         $obj->setCompilationPath(TEST_COMPILER_DIR);
 
         //compile
-        $comp = $obj->compile($correct_code, 'cpp');
+        $comp = $obj->compile($correct_code);
         $this->assertTrue($comp);
 
         //test wrong_answer
@@ -226,11 +227,11 @@ class ExecutorTest extends TestCase
                     return 0;
                 }
             ';
-        $obj = new Executor();
+        $obj = new Executor(CPP);
         $obj->setCompilationPath(TEST_COMPILER_DIR);
 
         //test time_limit_exceeded
-        $comp = $obj->compile($time_limit_code, 'cpp');
+        $comp = $obj->compile($time_limit_code);
         $this->assertTrue($comp);
         $time = $obj->run($input_file, $correct_output_file);
         $this->assertTrue($time == TIME_LIMIT_EXCEEDED);

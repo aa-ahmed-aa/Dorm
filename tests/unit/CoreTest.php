@@ -1,7 +1,7 @@
 <?php
 namespace Ahmedkhd\Dorm\Test;
 
-use Ahmedkhd\Dorm\Core;
+use Ahmedkhd\Dorm\Core\Core;
 use PHPUnit\Framework\TestCase;
 
 class CoreTest extends TestCase
