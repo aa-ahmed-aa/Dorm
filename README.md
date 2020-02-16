@@ -1,6 +1,8 @@
 # Dorm
 This is a package for running and compiling your c and c++ files add the compiler to the configurations file and you are ready to go :boom: .
-
+## Run TestCases & Coverage
+- Test cases `composer run-script test`.
+- Code Cvoverage `composer run-script coverage`.
 ## :honey_pot: Install 
 You can install the package using `composer require aa-ahmed-aa/dorm`
 ## :hammer: Configuration 
