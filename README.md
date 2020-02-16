@@ -3,18 +3,8 @@ This is a package for running and compiling your c and c++ files add the compile
 
 ## :honey_pot: Install 
 You can install the package using `composer require aa-ahmed-aa/dorm`
-### OR
-to your `composer.json` file add this to your require list
-```
-{
-    "require": {
-        "aa-ahmed-aa/dorm": "~1.1"
-    }
-}
-```
-then run `composer update`
 ## :hammer: Configuration 
-First you need to install compilers and configure their paths in `src/Config.php`<br>
+First you need to install compilers and configure their paths in `src/Core/Config.php`<br>
 #### C++
 - you can find the MinGW compiler <a href="https://nuwen.net/mingw.html">Here</a><br>
 - after you download the compiler files copy the `MinGW` folder to your `C://` drive<br>
@@ -31,7 +21,7 @@ so let's compile and run your first cpp code
 require ('vendor/autoload.php');
 use Ahmedkhd\Dorm\Dorm;
 
-$obj = new Executor();
+$obj = new Executor('cpp');
 
 //set compilation path
 $obj->setCompilationPath( __DIR__ );
@@ -53,7 +43,7 @@ $cpp_code = <<<'EOT'
 				}
 EOT;
 	
-	$comp = $obj->compile( $cpp_code, "cpp" );
+	$comp = $obj->compile($cpp_code);
 	echo "Compilation : " . ( ! is_array($comp) ? "Success" : "Fail" )  . "\n";
 	echo "Running is : " . ( ! is_array($comp) ? $obj->run() : "Fail" ) . "\n";
 ```
@@ -72,8 +62,8 @@ $java_code = <<<'EOT'
 }
 EOT;
 
-
-$comp = $obj->compile( $java_code, "java" );
+$obj = new Executor('java');
+$comp = $obj->compile($java_code);
 echo "Compilation : " . ( ! is_array($comp) ? "Success" : "Fail" )  . "\n";
 echo "Running is : " . ( ! is_array($comp) ? $obj->run() : "Fail" ) . "\n";
 ```
@@ -85,7 +75,8 @@ $python_code = <<<'EOT'
 print "Hello, Python3.4"
 EOT;
 
-$comp = $obj->compile( $python_code, "python2" );
+$obj = new Executor('python2');
+$comp = $obj->compile( $python_code);
 echo "Running : " . implode( $comp )  . "\n";
 ```
 
