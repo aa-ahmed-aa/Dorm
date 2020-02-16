@@ -1,7 +1,7 @@
 <?php
 namespace Ahmedkhd\Dorm\Test;
 
-use Ahmedkhd\Dorm\Config;
+use Ahmedkhd\Dorm\Core\Config;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
